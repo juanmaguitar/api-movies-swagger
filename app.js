@@ -1,7 +1,10 @@
 'use strict';
 
 var SwaggerExpress = require('swagger-express-mw');
+var SwaggerUi = require('swagger-tools/middleware/swagger-ui');
+
 var app = require('express')();
+
 module.exports = app; // for testing
 
 var config = {
@@ -10,6 +13,9 @@ var config = {
 
 SwaggerExpress.create(config, function(err, swaggerExpress) {
   if (err) { throw err; }
+
+  // add swagger-ui
+  app.use(SwaggerUi(swaggerExpress.runner.swagger));
 
   // install middleware
   swaggerExpress.register(app);
@@ -20,6 +26,8 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
     app.listen(port);
 	}
   //app.listen(port);
+
+  console.log(`App running on port ${port}...`)
 
   if (swaggerExpress.runner.swagger.paths['/hello']) {
     console.log('try this:\ncurl http://127.0.0.1:' + port + '/hello?name=Scott');
