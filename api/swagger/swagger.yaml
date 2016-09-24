@@ -3,7 +3,7 @@ info:
   version: "0.0.1"
   title: Movies Collection API
 # during dev, should point to your local machine
-host: https://pacific-stream-99550.herokuapp.com/
+host: pacific-stream-99550.herokuapp.com
 # basePath prefixes all resource paths
 basePath: /
 #
